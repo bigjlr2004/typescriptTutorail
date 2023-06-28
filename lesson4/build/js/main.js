@@ -1,16 +1,68 @@
 "use strict";
-let myName = "Dave";
-let meaningOfLife;
-let isLoading;
-let album;
-myName = "John";
-meaningOfLife = 42;
-isLoading = true;
-album = "Van Halen";
-album = 1984;
-const sum = (a, b) => {
+//Type Aliases
+// Literal types
+let myName;
+let userName;
+userName = "Amy";
+// functions
+const add = (a, b) => {
     return a + b;
 };
-let postId;
-let isActive;
-let re = /\w+/g;
+const logMsg = (message) => {
+    console.log(message);
+};
+logMsg("Hello");
+logMsg(add(2, 3));
+let subtract = function (c, d) {
+    return c - d;
+};
+logMsg(subtract(77, 55));
+// interface mathFunction {
+//   (a: number, b: number): number;
+// }
+let multiply = function (c, d) {
+    return c * d;
+};
+logMsg(multiply(77, 55));
+//Optional parameters
+const addAll = (a, b, c) => {
+    if (typeof c !== "undefined") {
+        return a + b + c;
+    }
+    return a + b;
+};
+const sumAll = (a, b, c = 2) => {
+    return a + b + c;
+};
+logMsg(addAll(2, 3, 7));
+logMsg(addAll(2, 3));
+logMsg(sumAll(2, 4));
+//Rest parameters
+const total = (...nums) => {
+    return nums.reduce((prev, curr) => prev + curr);
+};
+logMsg(total(1, 2, 3, 4));
+//Never type
+const createError = (errMsg) => {
+    throw new Error(errMsg);
+};
+const infinite = () => {
+    let i = 1;
+    while (true) {
+        i++;
+        if (i > 100)
+            break;
+    }
+};
+//custom type guard
+const isNumber = (value) => {
+    return typeof value === "number" ? true : false;
+};
+//use of the never type
+const numberOrString = (value) => {
+    if (typeof value === "string")
+        return "string";
+    if (isNumber(value))
+        return "number";
+    return createError("This should not ever happen");
+};
